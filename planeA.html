@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    body{
+    height: 100vh;
+    background-color: aqua;
+    background-image: url("img/city.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    overflow-y: hidden;
+}
+    #plane{
+    position: absolute;
+    left: 0;
+}
+    #plane:hover{
+    filter: contrast(120);
+}
+</style>
+</head>
+<body>
+<img id="plane" src="img/airplane.webp" width="350px" alt="">
+    <script>
+        const plane = document.getElementById('plane');
+        let i = 0;
+        let y=10;
+        let isJump=false;
+        let ln=Math.round((window.innerWidth-plane.getBoundingClientRect().width)/5);
+        let moveToRight = true;
+        plane.onclick = renderCat;
+
+        function movePlane(){
+        if (moveToRight){
+        plane.style.left = ++i+"px";
+        isJump= i>=2*ln && i<=4*ln;
+        (i>ln && i<2*ln)?++y:(i>4*ln && y>0)?--y:y;
+        plane.style.top=y+"px";
+
+    }
+        else
+        plane.style.left = --i+"px";
+        if(window.innerWidth-plane.getBoundingClientRect().width <= i){
+        plane.style.transform = "scale(-1,1)";
+        moveToRight = false;
+    }else if (i <= 0){
+        moveToRight = true;
+        plane.style.transform = "scale(1,1)";
+    }
+    }
+        function renderCat(){
+        if(!isJump) return;
+        const cat = document.createElement('img');
+        cat.src = "img/cat_parachute.png";
+        cat.style.width= "100px";
+        cat.style.position = "absolute"
+        cat.style.left = i+20+'px';
+        cat.style.top=y+10+'px';
+        document.body.append(cat);
+        cat.timer = setInterval(moveCat, 10, cat);
+    }
+        function moveCat(cat){
+        let currentTop = cat.getBoundingClientRect().top;
+        cat.style.top = ++currentTop+"px";
+        cat.style.left = 20+i+"px";
+        if(window.innerHeight - cat.getBoundingClientRect().height-15 < currentTop){
+        clearInterval(cat.timer);
+    }
+    }
+        setInterval(movePlane, 10);
+    </script>
+</body>
+</html>
