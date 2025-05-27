@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #limeBlock, #blueBlock, #yellowBlock, #redBlock{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        border: 2px solid black;
+      }
+      #redBlock{
+        background: red;
+        left: 0;
+        top: 0;
+      }
+      #yellowBlock{
+        background: yellow;
+        top: 0;
+        right: 0;
+      }
+      #blueBlock{
+        background: blue;
+        left: 0;
+        bottom: 0;
+      }
+      #limeBlock{
+        background: lime;
+        right: 0;
+        bottom: 0;
+      }
+      .circle{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        background: black;
+        position: absolute;
+        left: 700px;
+        top: 400px;
+        cursor: pointer;
+        border: 1px solid black;
+      }
+    </style>
+</head>
+  <body>
+    <div id="redBlock" data-color="red"></div>
+    <div id="yellowBlock" data-color="yellow"></div>
+    <div id="limeBlock" data-color="lime"></div>
+    <div id="blueBlock" data-color="blue"></div>
+    <script>
+      const colors = ['red', 'yellow', 'lime', 'blue'];
+      for (let i = 0; i < 7; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('circle');
+        circle.style.background = colors[getIntRandom(0, colors.length-1)];
+        circle.onmousedown = (event)=>{
+          circle.style.top = event.clientY-circle.getBoundingClientRect().width/2+"px";
+          circle.style.left = event.clientX-circle.getBoundingClientRect().height/2+"px";
+          window.onmousemove = (e)=>{
+            circle.style.top = e.clientY-circle.getBoundingClientRect().width/2+"px";
+            circle.style.left = e.clientX-circle.getBoundingClientRect().height/2+"px";
+          }
+          window.onmouseup = (ev)=>{
+            window.onmousemove = ()=>false;
+              let blocks = document.querySelectorAll('#redBlock, #yellowBlock, #limeBlock, #blueBlock');
+              blocks.forEach(block => {
+                  if (
+                      ev.clientX >= block.offsetLeft &&
+                      ev.clientX <= block.offsetLeft + block.offsetWidth &&
+                      ev.clientY >= block.offsetTop &&
+                      ev.clientY <= block.offsetTop + block.offsetHeight &&
+                      block.dataset.color === circle.style.background
+                  ) {
+                    circle.remove();
+                  }
+              });
+          }
+        }
+        document.body.append(circle);
+        circle.style.top = getIntRandom(200, window.innerHeight-208-circle.getBoundingClientRect().height)+"px";
+        circle.style.left = getIntRandom(200, window.innerWidth-208-circle.getBoundingClientRect().width)+'px';
+      }
+
+
+
+      // Math.random() 0-0.9999999999999
+      function getIntRandom(min, max){
+        return Math.round(Math.random()*(max-min)+min);
+      }
+    </script>
+  </body>
+</html>

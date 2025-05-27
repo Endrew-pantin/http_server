@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <img class="picture" src="/img/picture.jpg" alt="">
+        <img class="picture" src="/img/picture2.jpg" alt="">
+        <img src="/img/picture3.jpg" alt="">
+        <button id="btn">click me</button>
+        <script>
+            let i = 0;
+            let j = 0;
+            function clickMe(){
+                console.log(`clickMe №${++i}`);
+            }
+            function clickMe2(){
+                console.log(`clickMe2 №${++j}`);
+            }
+            const btn = document.getElementById('btn');
+            /*btn.onclick = clickMe;
+            btn.onclick = clickMe2;*/
+            btn.addEventListener('click', clickMe);
+            btn.addEventListener('click', clickMe2);
+            //const picture = document.getElementById('picture');
+            //const images = document.getElementsByClassName("picture");
+            //const images = document.querySelectorAll(".picture");
+            /*class User {
+                constructor(name, lastname, age) {
+                    this.name = name;
+                    this.lastname = lastname;
+                    this.age = age;
+                }
+                sayHi = (name)=>{
+                    console.log(`Привет ${name}, меня зовут ${this.name}`);
+                }
+                static sayAllHi = ()=>{
+                    console.log("Всем привет!");
+                }
+            }
+
+            let user1 = new User("Ivan", "Ivanov", 22);
+            let user2 = new User("Vaysa", "Pupkin", 33);
+            user1.sayHi(user2.name);
+            User.sayAllHi()*/
+
+        </script>
+    </body>
+</html>

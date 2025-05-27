@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+      <style>
+        .container{
+          width: 300px;
+          background: black;
+          margin: auto;
+          border: 5px solid gray;
+          padding-top: 15px;
+        }
+        .stop, .wait, .go{
+          width: 150px;
+          height: 150px;
+          margin: auto;
+          margin-bottom: 15px;
+          border-radius: 50%;
+          border: 2px solid silver;
+          box-shadow: inset 0 0 25px 5px rgba(0,0,0, .7);
+          background: gray;
+        }
+
+        .stop{
+            animation: 20s stop infinite;
+        }
+        .wait{
+            animation: 20s wait infinite;
+        }
+        .go{
+            animation: 20s go infinite;
+        }
+        @keyframes stop {
+            0%{background: red;}
+            19%{background: red;}
+            20%{background: gray;}
+            74%{background: gray;}
+            75%{background: red;}
+            100%{background: red;}
+        }
+        @keyframes wait {
+            0%{background: gray;}
+            19%{background: gray;}
+            20%{background: yellow;}
+            34%{background: yellow;}
+            35%{background: gray;}
+            59%{background: gray;}
+            60%{background: yellow;}
+            74%{background: yellow;}
+            75%{background: gray;}
+        }
+        @keyframes go {
+            0%{background: gray;}
+            34%{background: gray;}
+            35%{background: lime;}
+            59%{background: lime;}
+            60%{background: gray;}
+        }
+
+
+        /*.stop:hover{
+          background: red;
+        }
+        .wait:hover{
+          background: yellow;
+        }
+        .go:hover{
+          background: lime;
+        }*/
+
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="stop"></div>
+      <div class="wait"></div>
+      <div class="go"></div>
+    </div>
+  </body>
+</html>
